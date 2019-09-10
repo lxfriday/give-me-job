@@ -4,7 +4,8 @@
   "description": "would you give me the job??",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "lint": "eslint ."
   },
   "keywords": [
     "fe",
@@ -13,26 +14,29 @@
     "job"
   ],
   "author": "lxfriday",
-  "homepage": "",
-  "license": "ISC",
+  "homepage": "https://github.com/lxfriday/give-me-job",
+  "license": "GPL",
   "devDependencies": {
+    "@commitlint/cli": "^8.1.0",
+    "@commitlint/config-angular": "^8.1.0",
+    "@typescript-eslint/eslint-plugin": "^2.1.0",
+    "@typescript-eslint/parser": "^2.1.0",
+    "babel-eslint": "^10.0.3",
+    "eslint": "^6.3.0",
+    "eslint-config-prettier": "^6.1.0",
     "eslint-config-react-app": "^5.0.1",
     "eslint-plugin-flowtype": "^4.2.0",
-    "eslint": "^6.3.0",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-jsx-a11y": "^6.2.3",
-    "eslint-plugin-react": "^7.14.3",
-    "@typescript-eslint/eslint-plugin": "^2.1.0",
-    "eslint-plugin-react-hooks": "^2.0.1",
-    "prettier": "^1.18.2",
-    "eslint-config-prettier": "^6.1.0",
-    "@typescript-eslint/parser": "^2.1.0",
     "eslint-plugin-prettier": "^3.1.0",
-    "babel-eslint": "^10.0.3",
-    "lint-staged": "^9.2.5",
+    "eslint-plugin-react": "^7.14.3",
+    "eslint-plugin-react-hooks": "^2.0.1",
     "husky": "^3.0.5",
-    "@commitlint/cli": "^8.1.0",
-    "@commitlint/config-angular": "^8.1.0"
+    "jest": "^24.9.0",
+    "lint-staged": "^9.2.5",
+    "prettier": "^1.18.2",
+    "ts-jest": "^24.0.2",
+    "typescript": "^3.6.2"
   },
   "husky": {
     "hooks": {
@@ -46,5 +50,9 @@
       "prettier --write",
       "git add"
     ]
+  },
+  "dependencies": {
+    "@types/jest": "^24.0.18",
+    "pidusage": "^2.0.17"
   }
 }
