@@ -1,3 +1,3 @@
 # 算法部分
 
-1. [LRU](./LRU/README.md)
+1. [LRU](./LRU#146/)
