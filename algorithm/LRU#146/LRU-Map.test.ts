@@ -1,6 +1,6 @@
-const LRUCache = require('./LRU')
+const LRUCache = require('./LRU-Map')
 
-test('LRU', () => {
+test('LRU-Map', () => {
   const cache = new LRUCache(2 /* 缓存容量 */)
 
   cache.put(1, 1)

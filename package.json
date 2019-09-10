@@ -36,7 +36,9 @@
     "lint-staged": "^9.2.5",
     "prettier": "^1.18.2",
     "ts-jest": "^24.0.2",
-    "typescript": "^3.6.2"
+    "typescript": "^3.6.2",
+    "@types/jest": "^24.0.18",
+    "@types/node": "^12.7.4"
   },
   "husky": {
     "hooks": {
@@ -51,8 +53,5 @@
       "git add"
     ]
   },
-  "dependencies": {
-    "@types/jest": "^24.0.18",
-    "pidusage": "^2.0.17"
-  }
+  "dependencies": {}
 }
