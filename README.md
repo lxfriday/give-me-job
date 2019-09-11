@@ -1,9 +1,12 @@
 # Give Me Job
 
-- [ROADMAP](./ROADMAP.md)
-- [REF](./REF.md)
-
 ## algorithm
+
+算法测试：直接在项目根目录运行 `npm run test`，会自动执行所有测试用例
+
+- [LRU](./algorithm/LRU%23146)
+  - [Map 实现](./algorithm/LRU%23146/LRU-Map.ts)
+  - [双向链表实现](./algorithm/LRU%23146/LRU-LinkedList.test.ts)
 
 ## fe
 
