@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
+    "t": "npm run test",
     "lint": "eslint ."
   },
   "keywords": [
