@@ -6,7 +6,7 @@
 
 - [LRU](./algorithm/LRU%23146)
   - [Map 实现](./algorithm/LRU%23146/LRU-Map.ts)
-  - [双向链表实现](./algorithm/LRU%23146/LRU-LinkedList.test.ts)
+  - [双向链表实现](./algorithm/LRU%23146/LRU-LinkedList.ts)
 
 ## fe
 
