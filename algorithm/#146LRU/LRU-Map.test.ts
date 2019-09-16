@@ -1,4 +1,4 @@
-const LRUMap = require('./LRU-Map')
+import LRUMap from './LRU-Map'
 
 test('LRU Map 实现', () => {
   const cache = new LRUMap(2 /* 缓存容量 */)

@@ -1,4 +1,4 @@
-const LRULinkedList = require('./LRU-Map')
+import LRULinkedList from './LRU-LinkedList'
 
 test('LRU 链表实现', () => {
   const cache = new LRULinkedList(2 /* 缓存容量 */)

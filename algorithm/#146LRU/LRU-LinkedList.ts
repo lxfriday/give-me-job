@@ -1,5 +1,3 @@
-export {}
-
 // 列表节点
 class LinkedListNode {
   key: number
@@ -18,7 +16,7 @@ type NumObj = {
   [k: number]: LinkedListNode
 }
 
-class LRUCache {
+export default class LRUCache {
   // 头部节点
   head: LinkedListNode
   // 尾部节点
@@ -125,5 +123,3 @@ class LRUCache {
     }
   }
 }
-
-module.exports = LRUCache

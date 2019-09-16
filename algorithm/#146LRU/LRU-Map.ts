@@ -1,6 +1,4 @@
-export {}
-
-class LRUCache {
+export default class LRUCache {
   cache: Map<number, number>
   constructor(public capacity: number) {
     this.cache = new Map()
@@ -31,5 +29,3 @@ class LRUCache {
     this.cache.set(key, value)
   }
 }
-
-module.exports = LRUCache
