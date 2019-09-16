@@ -1,6 +1,6 @@
 import { isPalindrome1, isPalindrome2 } from './palindrome'
 
-test('回文数', () => {
+test('#9 回文数', () => {
   expect(isPalindrome1(121)).toBe(true)
   expect(isPalindrome1(12121)).toBe(true)
   expect(isPalindrome1(121212)).toBe(false)

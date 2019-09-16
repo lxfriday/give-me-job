@@ -16,7 +16,7 @@ function linkedListCreator(numarr: number[]) {
   return head
 }
 
-test('回文链表', () => {
+test('#234 回文链表', () => {
   expect(isPalindromeLinkedList(linkedListCreator([1, 2, 3]))).toBe(false)
   expect(isPalindromeLinkedList(linkedListCreator([1, 2, 1]))).toBe(true)
   expect(isPalindromeLinkedList(linkedListCreator([]))).toBe(true)

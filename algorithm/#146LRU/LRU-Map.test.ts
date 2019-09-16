@@ -1,6 +1,6 @@
 import LRUMap from './LRU-Map'
 
-test('LRU Map 实现', () => {
+test('#146 LRU Map 实现', () => {
   const cache = new LRUMap(2 /* 缓存容量 */)
 
   cache.put(1, 1)
