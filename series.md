@@ -2,7 +2,8 @@
 
 ## 前端也来点算法(TS 版)
 
-1. [前端也来点算法(TS 版) | 1 - LRU Cache](https://juejin.im/post/5d77b68951882520d46abd18)
+1. [前端也来点算法(TypeScript 版) | 1 - LRU Cache](https://juejin.im/post/5d77b68951882520d46abd18)
+1. [前端也来点算法(TypeScript 版) | 2 - 回文数和回文链表](https://juejin.im/post/5d7f9a9f6fb9a06b051820ac)
 
 ## React 源码系列
 
