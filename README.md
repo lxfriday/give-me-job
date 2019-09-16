@@ -6,9 +6,9 @@
 
 算法测试：直接在项目根目录运行 `npm run test`，会自动执行所有测试用例
 
-- [LRU](./algorithm/LRU%23146)
-  - [Map 实现](./algorithm/LRU%23146/LRU-Map.ts)
-  - [双向链表实现](./algorithm/LRU%23146/LRU-LinkedList.ts)
+- [LRU](./algorithm/%23146LRU)
+  - [Map 实现](./algorithm/%23146LRU/LRU-Map.ts)
+  - [双向链表实现](./algorithm/%23146LRU/LRU-LinkedList.ts)
 
 ## React
 
