@@ -16,7 +16,7 @@
   ],
   "author": "lxfriday",
   "homepage": "https://github.com/lxfriday/give-me-job",
-  "license": "GPL",
+  "license": "GPL-v3",
   "devDependencies": {
     "@commitlint/cli": "^8.1.0",
     "@commitlint/config-angular": "^8.1.0",
