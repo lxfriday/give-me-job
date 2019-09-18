@@ -14,6 +14,10 @@
 1. [React 源码系列 | React 对象源码解析](https://juejin.im/post/5d2f55776fb9a07ec63b4a63)
 1. [React 源码中的 Object.seal](https://juejin.im/post/5d48dd13e51d453bb13b65c3)
 
+## 造玩具学原理系列
+
+1. [造玩具学原理系列 | redux 源码解析及模拟实现](https://juejin.im/post/5d7a3d706fb9a06ad16f9edf#heading-0)
+
 ## TypeScript 入门系列
 
 1. [TypeScript 入门系列 | TypeScript 基础（二）](https://juejin.im/post/5d6b59f351882559f971d340)
