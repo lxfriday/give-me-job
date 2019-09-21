@@ -17,8 +17,12 @@ n: 13   k: 2
 
 leetcode
 
-[https://leetcode-cn.com/problems/k-th-smallest-in-lexicographical-order/](https://leetcode-cn.com/problems/k-th-smallest-in-lexicographical-order/)
+- [https://leetcode-cn.com/problems/k-th-smallest-in-lexicographical-order/](https://leetcode-cn.com/problems/k-th-smallest-in-lexicographical-order/)
 
 题解
 
-[findKthNumber.ts](./findKthNumber.ts)
+- [findKthNumber.ts](./findKthNumber.ts)
+
+图示
+
+- ![图示](./findKthNumber.png)
