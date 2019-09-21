@@ -25,4 +25,4 @@ leetcode
 
 图示
 
-- ![图示](./findKthNumber.png)
+![图示](./findKthNumber.png)
