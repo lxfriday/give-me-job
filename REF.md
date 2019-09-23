@@ -16,10 +16,43 @@
 
 ### 文章
 
-- [快速打造简易高效的 webpack 配置](https://juejin.im/post/595a0ed86fb9a06ba6463cd3)
-- [那些你不经意间使用的设计模式(一) - 创建型模式](https://juejin.im/post/5d35d8c4518825360f16198e)
+- [这些年掘金上的优质前端文章，篇篇经典，一次打包带走！](https://juejin.im/post/5d42f4f46fb9a06adb7fc2a1)
+
+---
+
+**JS**
+
 - [这一次，彻底弄懂 JavaScript 执行机制](https://juejin.im/post/59e85eebf265da430d571f89)
 
-### 精品文章收集帖
+---
 
-- [这些年掘金上的优质前端文章，篇篇经典，一次打包带走！](https://juejin.im/post/5d42f4f46fb9a06adb7fc2a1)
+**设计模式**
+
+- [那些你不经意间使用的设计模式(一) - 创建型模式](https://juejin.im/post/5d35d8c4518825360f16198e)
+
+---
+
+**webpack**
+
+- [2018/11/20 - webpack 原理与实践（二）：实现一个 webpack 插件](https://github.com/BooheeFE/weekly/issues/25)
+- [2018/11/05 - webpack 原理与实践（一）：打包流程](https://github.com/BooheeFE/weekly/issues/23)
+- [Webpack 优化——将你的构建效率提速翻倍](https://juejin.im/post/5d614dc96fb9a06ae3726b3e)
+- [快速打造简易高效的 webpack 配置](https://juejin.im/post/595a0ed86fb9a06ba6463cd3)
+
+---
+
+**vdom**
+
+- [Virtual DOM 中那些你不知道的事](https://github.com/lulujianglab/blog/issues/46)
+
+---
+
+**react**
+
+- [React16 常用 api 解析以及原理剖析](https://ru23.github.io/react-ppt/#/)
+
+---
+
+**flutter**
+
+- [Flutter Widget Livebook](https://flutter-widget-livebook.blankapp.org/basics/introduction/)
