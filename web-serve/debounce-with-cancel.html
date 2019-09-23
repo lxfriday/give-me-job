@@ -54,6 +54,8 @@ function debounce(func, wait, immediate) {
     if (immediate) {
       const callNow = !timeout
       timeout = setTimeout(() => {
+        // 这里只有在 wait 时长之后，timeout 为 null，然后触发防抖函数才能立即执行，
+        // 否则 callNow 为 false，不会立即执行，计时器会重新计时
         timeout = null
       }, wait)
       if (callNow) func.apply(ctx, args)
