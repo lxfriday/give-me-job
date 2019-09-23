@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>防抖</title>
+    <link rel="stylesheet" href="https://unpkg.com/codemirror@5.49.0/lib/codemirror.css" />
+    <link rel="stylesheet" href="https://unpkg.com/codemirror@5.49.0/theme/monokai.css" />
+    <link rel="stylesheet" href="https://unpkg.com/codemirror@5.49.0/addon/hint/show-hint.css" />
+    <style>
+      body {
+        margin: 0;
+      }
+      #container {
+        box-sizing: border-box;
+        background-color: gray;
+        height: 300px;
+        padding-top: 100px;
+        color: white;
+        font-size: 50px;
+        text-align: center;
+      }
+      #editor {
+        max-width: 800px;
+      }
+      .CodeMirror.cm-s-monokai {
+        font-family: Consolas, 'Courier New', monospace;
+      }
+      h3 {
+        margin-left: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <h3>debounce with cancel</h3>
+    <div id="container"></div>
+    <button id="cancel">取消</button>
+    <div class="center">
+      <textarea id="editor"></textarea>
+    </div>
+    <script src="https://unpkg.com/codemirror@5.49.0/lib/codemirror.js"></script>
+    <script src="https://unpkg.com/codemirror@5.49.0/mode/javascript/javascript.js"></script>
+    <script src="https://unpkg.com/codemirror@5.49.0/addon/hint/show-hint.js"></script>
+    <script src="https://unpkg.com/codemirror@5.49.0/addon/hint/javascript-hint.js"></script>
+
+    <script>
+      const code = `// 定时器 2s，鼠标进入灰色区域后不动，则 2s 后数字 +1 ，移动鼠标，然后点击取消，数字不会增加
+function debounce(func, wait, immediate) {
+  let timeout
+  function debounced(...args) {
+    const ctx = this
+    if (timeout) clearTimeout(timeout)
+    if (immediate) {
+      const callNow = !timeout
+      timeout = setTimeout(() => {
+        timeout = null
+      }, wait)
+      if (callNow) func.apply(ctx, args)
+    } else {
+      timeout = setTimeout(() => {
+        func.apply(ctx, args)
+      }, wait)
+    }
+  }
+  debounced.cancel = function cancel() {
+    clearTimeout(timeout)
+    timeout = null
+  }
+  return debounced
+}
+// html ----------------
+<div id="container"></div>
+<button id="cancel">取消</button>
+<div class="center">
+  <textarea id="editor"></textarea>
+</div>
+// js ----------------
+let count = 0
+const container = document.querySelector('#container')
+const cancel = document.querySelector('#cancel')
+function setCount(e) {
+  console.log(this)
+  console.log(e)
+  container.innerHTML = count++
+}
+const func = debounce(setCount, 2000, false)
+container.onmousemove = func
+cancel.onclick = function cancelClick() {
+  func.cancel()
+}
+`
+
+      const editor = CodeMirror.fromTextArea(document.querySelector('#editor'), {
+        lineNumbers: true,
+        tabSize: 2,
+        theme: 'monokai',
+        extraKeys: {
+          'Ctrl-Q': 'autocomplete',
+        },
+      })
+      editor.setSize('auto', 700)
+      editor.setValue(code)
+    </script>
+    <script>
+      function debounce(func, wait, immediate) {
+        let timeout
+        function debounced(...args) {
+          const ctx = this
+          if (timeout) clearTimeout(timeout)
+
+          if (immediate) {
+            const callNow = !timeout
+            timeout = setTimeout(() => {
+              timeout = null
+            }, wait)
+            if (callNow) func.apply(ctx, args)
+          } else {
+            timeout = setTimeout(() => {
+              func.apply(ctx, args)
+            }, wait)
+          }
+        }
+        debounced.cancel = function cancel() {
+          clearTimeout(timeout)
+          timeout = null
+        }
+        return debounced
+      }
+      let count = 0
+      const container = document.querySelector('#container')
+      const cancel = document.querySelector('#cancel')
+      function setCount(e) {
+        console.log(this)
+        console.log(e)
+        container.innerHTML = count++
+      }
+      const func = debounce(setCount, 2000, false)
+      container.onmousemove = func
+      cancel.onclick = function cancelClick() {
+        func.cancel()
+      }
+    </script>
+  </body>
+</html>
