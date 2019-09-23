@@ -1,7 +1,7 @@
 function debounce(func, wait, immediate) {
   let timeout
   return function debounced(...args) {
-    // eslint-disable-next-line
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
     const ctx = this
     if (timeout) clearTimeout(timeout)
 
