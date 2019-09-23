@@ -6,6 +6,7 @@
 
 ### 博客
 
+- [薄荷前端](https://github.com/BooheeFE/weekly)
 - [冴羽的博客 https://github.com/mqyqingfeng/Blog](https://github.com/mqyqingfeng/Blog)
 - [poetries/FE-Interview-Questions](http://blog.poetries.top/FE-Interview-Questions/base/)
 - [前端面试与进阶指南 https://www.cxymsg.com/](https://www.cxymsg.com/)
