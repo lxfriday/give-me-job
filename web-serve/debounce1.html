@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>防抖</title>
+    <link rel="stylesheet" href="https://unpkg.com/codemirror@5.49.0/lib/codemirror.css" />
+    <link rel="stylesheet" href="https://unpkg.com/codemirror@5.49.0/theme/monokai.css" />
+    <link rel="stylesheet" href="https://unpkg.com/codemirror@5.49.0/addon/hint/show-hint.css" />
+    <style>
+      body {
+        margin: 0;
+      }
+      #container {
+        box-sizing: border-box;
+        background-color: gray;
+        height: 300px;
+        padding-top: 100px;
+        color: white;
+        font-size: 50px;
+        text-align: center;
+      }
+      #editor {
+        max-width: 800px;
+      }
+      .CodeMirror.cm-s-monokai {
+        font-family: Consolas, 'Courier New', monospace;
+      }
+      h3 {
+        margin-left: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <h3>debounce1</h3>
+    <div id="container"></div>
+    <div class="center">
+      <textarea id="editor"></textarea>
+    </div>
+    <script src="https://unpkg.com/codemirror@5.49.0/lib/codemirror.js"></script>
+    <script src="https://unpkg.com/codemirror@5.49.0/mode/javascript/javascript.js"></script>
+    <script src="https://unpkg.com/codemirror@5.49.0/addon/hint/show-hint.js"></script>
+    <script src="https://unpkg.com/codemirror@5.49.0/addon/hint/javascript-hint.js"></script>
+
+    <script>
+      const code = `// 鼠标移到灰色区域之后不动将会出现变化，一直动则不会变化
+function debounce(func, wait) {
+  let timeout
+  return function debounced(...args) {
+    const ctx = this
+    if (timeout) clearTimeout(timeout)
+    timeout = setTimeout(() => {
+      func.apply(ctx, args)
+    }, wait)
+  }
+}
+// html ----------------
+<div id="container"></div>
+<div class="center">
+  <textarea id="editor"></textarea>
+</div>
+// js ----------------
+let count = 0
+const container = document.querySelector('#container')
+function setCount(e) {
+  console.log(this)
+  console.log(e)
+  container.innerHTML = count++
+}
+let d = debounce(setCount, 1000, true)
+d()
+container.onmousemove = d
+`
+
+      const editor = CodeMirror.fromTextArea(document.querySelector('#editor'), {
+        lineNumbers: true,
+        tabSize: 2,
+        theme: 'monokai',
+        extraKeys: {
+          'Ctrl-Q': 'autocomplete',
+        },
+      })
+      editor.setSize('auto', 700)
+      editor.setValue(code)
+    </script>
+    <script>
+      function debounce(func, wait) {
+        let timeout
+        return function debounced(...args) {
+          const ctx = this
+          if (timeout) clearTimeout(timeout)
+          timeout = setTimeout(() => {
+            func.apply(ctx, args)
+          }, wait)
+        }
+      }
+      let count = 0
+      const container = document.querySelector('#container')
+      function setCount(e) {
+        console.log(this)
+        console.log(e)
+        container.innerHTML = count++
+      }
+      let d = debounce(setCount, 1000, true)
+      d()
+      container.onmousemove = d
+    </script>
+  </body>
+</html>
