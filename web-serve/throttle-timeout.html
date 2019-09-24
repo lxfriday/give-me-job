@@ -33,7 +33,7 @@
     </style>
   </head>
   <body>
-    <h3>时间戳节流</h3>
+    <h3>定时器节流</h3>
     <div id="container"></div>
     <div class="center">
       <textarea id="editor"></textarea>
@@ -53,14 +53,16 @@
     <script>
       const code = `// 鼠标在灰色区域不管怎么动，数字都只会每 2s 变化一次，而且鼠标移开之后数字再也不会变化，命令行中可以看到每 2s 打印一次时间
 function throttle(func, wait) {
-  let previous = 0
+  let timeout = 0
   return function throttled(...args) {
     const ctx = this
-    const now = Date.now()
-    const remain = wait - (now - previous)
-    if (remain <= 0) {
-      func.apply(ctx, args)
-      previous = now
+    // 如果已经是定时器定时阶段，则直接跳过，相当于忽略了触发
+    // 必须等到定时器到时间之后
+    if (!timeout) {
+      timeout = setTimeout(() => {
+        func.apply(ctx, args)
+        timeout = null
+      }, wait)
     }
   }
 }
@@ -95,14 +97,16 @@ container.onmousemove = d
     </script>
     <script>
       function throttle(func, wait) {
-        let previous = 0
+        let timeout = 0
         return function throttled(...args) {
           const ctx = this
-          const now = Date.now()
-          const remain = wait - (now - previous)
-          if (remain <= 0) {
-            func.apply(ctx, args)
-            previous = now
+          // 如果已经是定时器定时阶段，则直接跳过，相当于忽略了触发
+          // 必须等到定时器到时间之后
+          if (!timeout) {
+            timeout = setTimeout(() => {
+              func.apply(ctx, args)
+              timeout = null
+            }, wait)
           }
         }
       }
