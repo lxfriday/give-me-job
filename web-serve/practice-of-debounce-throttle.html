@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>节流防抖应用</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <style>
+      .cursor:hover {
+        cursor: pointer;
+      }
+      .row .col {
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="row">
+      <form class="col s6">
+        <div class="row">
+          <div class="input-field col s11 offset-s1">
+            <i class="material-icons prefix">account_circle</i>
+            <input id="input" type="text" class="validate" />
+            <label for="input">姓名</label>
+          </div>
+          <div id="list" class="collection col s11 offset-s1 cursor">
+            <!-- <a class="collection-item">Alvin</a> -->
+          </div>
+        </div>
+      </form>
+      <div id="side" class="card-panel teal col s5 offset-s1" style="padding: 12px;"></div>
+      <div id="side-res" class="card-panel teal col s5 offset-s1" style="padding: 12px;"></div>
+    </div>
+
+    <script src="./practice-of-debounce-throttle.js"></script>
+  </body>
+</html>
