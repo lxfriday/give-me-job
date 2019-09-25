@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="stylesheet" href="./dist/css/spop.min.css" />
+    <script src="./dist/js/spop.min.js"></script>
     <style>
       .cursor:hover {
         cursor: pointer;
@@ -20,23 +22,45 @@
       }
       #list {
         margin-top: -23px;
+        z-index: 999;
+      }
+      .search-result {
+        border: 1px solid #143250;
+        left: 6%;
+        padding: 12px;
+        border-radius: 5px;
+        width: 44.5%;
+        top: 80px;
+        position: absolute;
+      }
+      .search-result-title {
+        font-weight: bold;
+      }
+      #result-container {
+        margin-top: 18px;
+      }
+      .card-image img {
+        height: 150px;
       }
     </style>
   </head>
   <body>
-    <div class="row">
-      <form class="col s6">
-        <div class="row">
+    <div id="page" class=" row">
+      <div class="col s6">
+        <div class="row search-area">
           <div class="input-field col s11 offset-s1">
             <i class="material-icons prefix">phone_android</i>
-            <input id="input" type="text" class="validate" maxlength="30" />
-            <label for="input">搜索你喜欢的手机</label>
+            <input id="input" type="text" class="validate" maxlength="30" autocomplete="off" />
           </div>
-          <div id="list" class="collection col s11 offset-s1 cursor" style="display: none">
+          <ul id="list" class="collection col s11 offset-s1 cursor" style="display: none">
             <!-- <a class="collection-item">Alvin</a> -->
-          </div>
+          </ul>
         </div>
-      </form>
+        <div class="search-result">
+          <h6><span class="search-result-title">搜索结果(选中后0.5秒才显示)</span></h6>
+          <div id="result-container"></div>
+        </div>
+      </div>
       <div id="side" class="card-panel teal col s5 offset-s1" style="padding: 12px;"></div>
     </div>
     <script
@@ -46,6 +70,15 @@
     ></script>
     <script>
       Sentry.init({ dsn: 'https://53036e3f89d24c83a5f273c3b7480c32@sentry.io/1759326' })
+    </script>
+    <script>
+      // 提示框
+      // http://silvio-r.github.io/spop/
+      spop.defaults = {
+        autoclose: 2000,
+        position: 'top-right',
+        style: 'success',
+      }
     </script>
     <script src="./debounce-search.js"></script>
   </body>

@@ -1,3 +1,4 @@
+/* eslint-disable */
 function debounce(func, wait, immediate) {
   let timeout
   function debounced(...args) {
@@ -35,11 +36,47 @@ function getListData(v, $side) {
   return res
 }
 
+function createResultListItem(title) {
+  return `<div class="card horizontal">
+            <div class="card-image">
+              <img src="http://qiniu1.lxfriday.xyz/blog/QQ截图20190925124901_20190925125022.png" />
+            </div>
+            <div class="card-stacked">
+              <div class="card-content">
+                <p>${title}</p>
+              </div>
+              <div class="card-action">
+                <a href="#">This is a link</a>
+              </div>
+            </div>
+          </div>`
+}
+
+/**
+ * 生成搜索结果列表
+ */
+function generateSearchResult(title, $ref) {
+  let child = ''
+  for (let i = 0; i < Math.floor(Math.random() * 10) + 3; i++) {
+    child += createResultListItem(`${title} -- ${i}`)
+  }
+  $ref.innerHTML = child
+}
+
 document.addEventListener('DOMContentLoaded', function() {
+  const $page = document.querySelector('#page')
   const $input = document.querySelector('#input')
   const $list = document.querySelector('#list')
   const $side = document.querySelector('#side')
-  const $sideRes = document.querySelector('#side-res')
+  const $resultContainer = document.querySelector('#result-container')
+  let prevSearch = ''
+
+  function showList() {
+    $list.style.display = 'block'
+  }
+  function hideList(params) {
+    $list.style.display = 'none'
+  }
 
   // 显示新的搜索建议
   function appendListItem(data, $ref) {
@@ -47,6 +84,7 @@ document.addEventListener('DOMContentLoaded', function() {
     for (let i = 0; i < data.length; i++) {
       const a = document.createElement('a')
       a.classList.add('collection-item')
+      a.dataset.value = data[i]
       a.innerText = data[i]
       df.appendChild(a)
     }
@@ -55,6 +93,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   const dAppendListItem = debounce(appendListItem, 200)
+  const showSearchResult = debounce(generateSearchResult, 500)
 
   // 没有输入的时候给出预 suggestion
   appendListItem(getListData('MI Alpha', $side), $list)
@@ -70,11 +109,30 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   })
   // 聚焦显示
-  $input.addEventListener('focus', function() {
-    $list.style.display = 'block'
+  $input.addEventListener('focus', function(e) {
+    showList()
   })
-  // 失焦隐藏
-  $input.addEventListener('blur', function() {
-    $list.style.display = 'none'
+  $input.addEventListener('keydown', function(e) {
+    // 点击了回车
+    if (e.keyCode === 13) {
+      hideList()
+      const value = $input.value
+      if (prevSearch !== value) {
+        spop(`发起搜索： ${value}`)
+        showSearchResult(value, $resultContainer)
+        prevSearch = value
+      } else {
+        spop(`搜索的是相同的搜索词，自动忽略哈~ ${value}`)
+      }
+    } else {
+      showList()
+    }
+  })
+  $list.addEventListener('click', function(e) {
+    hideList()
+    const value = e.target.dataset.value
+    $input.value = value
+    spop(`发起搜索： ${value}`)
+    showSearchResult(value, $resultContainer)
   })
 })
