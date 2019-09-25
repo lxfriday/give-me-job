@@ -6,7 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>防抖优化滑动体验</title>
     <link rel="stylesheet" href="./dist/css/spop.min.css" />
-    <script src="./dist/js/spop.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/codemirror@5.49.0/lib/codemirror.css" />
+    <link rel="stylesheet" href="https://unpkg.com/codemirror@5.49.0/theme/monokai.css" />
+    <link rel="stylesheet" href="https://unpkg.com/codemirror@5.49.0/addon/hint/show-hint.css" />
     <style>
       body {
         margin: 0;
@@ -77,14 +79,20 @@
         <p class="bottom-noti">我在底部了哈</p>
       </div>
     </div>
-    <script
+    <textarea id="editor"></textarea>
+    <!-- <script
       src="https://browser.sentry-cdn.com/5.6.3/bundle.min.js"
       integrity="sha384-/Cqa/8kaWn7emdqIBLk3AkFMAHBk0LObErtMhO+hr52CntkaurEnihPmqYj3uJho"
       crossorigin="anonymous"
     ></script>
     <script>
       Sentry.init({ dsn: 'https://53036e3f89d24c83a5f273c3b7480c32@sentry.io/1759326' })
-    </script>
+    </script> -->
+    <script src="./dist/js/spop.min.js"></script>
+    <script src="https://unpkg.com/codemirror@5.49.0/lib/codemirror.js"></script>
+    <script src="https://unpkg.com/codemirror@5.49.0/mode/javascript/javascript.js"></script>
+    <script src="https://unpkg.com/codemirror@5.49.0/addon/hint/show-hint.js"></script>
+    <script src="https://unpkg.com/codemirror@5.49.0/addon/hint/javascript-hint.js"></script>
     <script>
       // 提示框
       // http://silvio-r.github.io/spop/
@@ -93,6 +101,43 @@
         position: 'top-right',
         style: 'success',
       }
+    </script>
+    <script>
+      const code = `
+document.addEventListener('DOMContentLoaded', function() {
+  const $page = document.querySelector('#page')
+  function toastNoti(template = '', position = 'top-left') {
+    spop({
+      position,
+      template,
+    })
+  }
+  const debouncedToastNoti = debounce(toastNoti, 500)
+  $page.addEventListener('scroll', function(e) {
+    const scrollTop = e.target.scrollTop
+    toastNoti(\`滚动到 \${scrollTop}\`)
+    debouncedToastNoti(\`滚动到 \${scrollTop}\`, 'top-right')
+  })
+})
+
+<div id="page">
+  <div id="content-area">
+    <p class="bottom-noti">我在底部了哈</p>
+  </div>
+</div>
+<textarea id="editor"></textarea>
+`
+
+      const editor = CodeMirror.fromTextArea(document.querySelector('#editor'), {
+        lineNumbers: true,
+        tabSize: 2,
+        theme: 'monokai',
+        extraKeys: {
+          'Ctrl-Q': 'autocomplete',
+        },
+      })
+      editor.setSize('auto', 700)
+      editor.setValue(code)
     </script>
     <script src="./debounce-scroll.js"></script>
   </body>

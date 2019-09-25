@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
       template,
     })
   }
-  const debouncedToastNoti = debounce(toastNoti, 500, true)
+  const debouncedToastNoti = debounce(toastNoti, 500)
   $page.addEventListener('scroll', function(e) {
     const scrollTop = e.target.scrollTop
     toastNoti(`滚动到 ${scrollTop}`)
