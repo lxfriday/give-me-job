@@ -1,10 +1,37 @@
+function debounce(func, wait, immediate) {
+  let timeout
+  function debounced(...args) {
+    // eslint-disable-next-line
+    const ctx = this
+    if (timeout) clearTimeout(timeout)
+
+    if (immediate) {
+      const callNow = !timeout
+      timeout = setTimeout(() => {
+        timeout = null
+      }, wait)
+      if (callNow) func.apply(ctx, args)
+    } else {
+      timeout = setTimeout(() => {
+        func.apply(ctx, args)
+      }, wait)
+    }
+  }
+  debounced.cancel = function cancel() {
+    clearTimeout(timeout)
+    timeout = null
+  }
+  return debounced
+}
+
 function getListData(v, $side) {
   const res = []
+  if (!v.length) return res
   const length = ((Math.random() * 20) >> 1) + 1
   for (let i = 0; i < length; i++) {
     res.push(v + '  ' + Math.floor(Math.random() * 1000))
   }
-  $side.innerHTML = '<p>请求到的数据</p>' + '<p>' + JSON.stringify(res) + '</p>'
+  $side.innerHTML = '<p>虽然内部计算很多，但是 suggest 列表几乎不变动，只显示最后的结果</p>' + '<p>' + JSON.stringify(res) + '</p>'
   return res
 }
 
@@ -26,7 +53,15 @@ document.addEventListener('DOMContentLoaded', function() {
     $ref.appendChild(df)
   }
 
+  const dAppendListItem = debounce(appendListItem, 200)
+
   $input.addEventListener('input', function(e) {
-    appendListItem(getListData(e.target.value, $side), $list)
+    dAppendListItem(getListData(e.target.value, $side), $list)
+  })
+  $input.addEventListener('focus', function() {
+    $list.style.display = 'block'
+  })
+  $input.addEventListener('blur', function() {
+    $list.style.display = 'none'
   })
 })
