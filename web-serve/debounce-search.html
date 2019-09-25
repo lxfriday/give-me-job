@@ -15,6 +15,12 @@
       .row .col {
         padding: 0;
       }
+      .hide {
+        display: none;
+      }
+      #list {
+        margin-top: -23px;
+      }
     </style>
   </head>
   <body>
@@ -22,11 +28,11 @@
       <form class="col s6">
         <div class="row">
           <div class="input-field col s11 offset-s1">
-            <i class="material-icons prefix">cake</i>
-            <input id="input" type="text" class="validate" />
-            <label for="input">Search Anything</label>
+            <i class="material-icons prefix">phone_android</i>
+            <input id="input" type="text" class="validate" maxlength="30" />
+            <label for="input">搜索你喜欢的手机</label>
           </div>
-          <div id="list" class="collection col s11 offset-s1 cursor">
+          <div id="list" class="collection col s11 offset-s1 cursor" style="display: none">
             <!-- <a class="collection-item">Alvin</a> -->
           </div>
         </div>
@@ -34,6 +40,6 @@
       <div id="side" class="card-panel teal col s5 offset-s1" style="padding: 12px;"></div>
     </div>
 
-    <script src="./practice-of-debounce-throttle.js"></script>
+    <script src="./debounce-search.js"></script>
   </body>
 </html>

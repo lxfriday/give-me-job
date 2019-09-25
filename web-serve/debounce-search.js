@@ -27,11 +27,11 @@ function debounce(func, wait, immediate) {
 function getListData(v, $side) {
   const res = []
   if (!v.length) return res
-  const length = ((Math.random() * 20) >> 1) + 1
+  const length = 10
   for (let i = 0; i < length; i++) {
-    res.push(v + '  ' + Math.floor(Math.random() * 1000))
+    res.push(v + '  ' + (10 - i))
   }
-  $side.innerHTML = '<p>虽然内部计算很多，但是 suggest 列表几乎不变动，只显示最后的结果</p>' + '<p>' + JSON.stringify(res) + '</p>'
+  $side.innerHTML = '<p>虽然内部计算很多，但是 suggesttion 列表没有变动，只显示最后的结果</p>' + '<p>' + JSON.stringify(res) + '</p>'
   return res
 }
 
@@ -41,6 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const $side = document.querySelector('#side')
   const $sideRes = document.querySelector('#side-res')
 
+  // 显示新的搜索建议
   function appendListItem(data, $ref) {
     const df = document.createDocumentFragment()
     for (let i = 0; i < data.length; i++) {
@@ -55,12 +56,24 @@ document.addEventListener('DOMContentLoaded', function() {
 
   const dAppendListItem = debounce(appendListItem, 200)
 
+  // 没有输入的时候给出预 suggestion
+  appendListItem(getListData('MI Alpha', $side), $list)
+
   $input.addEventListener('input', function(e) {
-    dAppendListItem(getListData(e.target.value, $side), $list)
+    // 依据搜索内容给出提示
+    const searchV = e.target.value
+    if (searchV.length) {
+      dAppendListItem(getListData(e.target.value, $side), $list)
+    } else {
+      // 清空的时候给出默认的搜索建议
+      dAppendListItem(getListData('MI Alpha', $side), $list)
+    }
   })
+  // 聚焦显示
   $input.addEventListener('focus', function() {
     $list.style.display = 'block'
   })
+  // 失焦隐藏
   $input.addEventListener('blur', function() {
     $list.style.display = 'none'
   })
