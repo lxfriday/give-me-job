@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-  const targetUrl = 'http://quan.suning.com/getSysTime.do'
+  const targetUrl = 'https://quan.suning.com/getSysTime.do'
 
   const $button = document.querySelector('#button')
   $button.addEventListener('click', function() {
