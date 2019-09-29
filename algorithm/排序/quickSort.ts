@@ -1,7 +1,5 @@
 /**
- * 快排
- * 非稳定，原地排序
- * 时间复杂度：最好 O(nlogn)、最差 O(n2)、平均 O(nlogn)
+ * 普通快排
  */
 
 function swap(arr: number[], a: number, b: number) {

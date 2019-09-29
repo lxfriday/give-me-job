@@ -32,14 +32,18 @@ export function bucketSort(arr: at, size: number = 5) {
     bucket[j].push(arr[i])
     let l = bucket[j].length
     while (l > 0) {
-      bucket[l] < bucket[l - 1] && swap(arr, l, l - 1)
+      // 每个桶内部要进行排序
+      // 冒泡已经很快了，其实只有一个元素需要确定自己的位置
+      bucket[j][l] < bucket[j][l - 1] && swap(bucket[j], l, l - 1)
+      // 不要直接这么一个排序，bucket[j]内部都是有序的，只有最后一个是无序的
+      // bucket[j].sort((a, b) => a - b)
       l--
     }
   }
 
+  // 每个桶内部数据已经是有序的
+  // 将桶内数组拼接起来即可
   for (let i = 0; i < bucket.length; i++) {
-    console.log(bucket[i])
-
     const l = bucket[i] ? bucket[i].length : 0
     for (let j = 0; j < l; j++) {
       res.push(bucket[i][j])
@@ -47,4 +51,4 @@ export function bucketSort(arr: at, size: number = 5) {
   }
   return res
 }
-console.log(bucketSort([2, 3, 1, 5, 2, 7, 555, 1, 20, 0, 12]))
+// console.log(bucketSort([2, 3, 1, 5, 2, 7, 555, 1, 20, 0, 12, 33, 22, 50]))
