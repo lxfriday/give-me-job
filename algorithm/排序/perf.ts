@@ -7,13 +7,14 @@ import { heapSort } from './heapSort'
 import { shellSort, shellSort2 } from './shellSort'
 import { quickSort } from './quickSort'
 import { quickSort2 } from './quickSort2'
+import { quickSort3 } from './quickSort3'
 import { countingSort } from './countingSort'
 import { radixSort } from './radixSort'
 import { bucketSort } from './bucketSort'
 import { cocktailSort } from './cocktailSort'
 
 const arr = []
-for (let i = 0; i < 1000; i++) {
+for (let i = 0; i < 100000; i++) {
   arr.push(Math.floor(Math.random() * 10000))
 }
 
@@ -40,6 +41,10 @@ console.timeEnd('quickSort -> O(nlogn)')
 console.time('quickSort2 -> O(nlogn)')
 quickSort2(arr.slice())
 console.timeEnd('quickSort2 -> O(nlogn)')
+
+console.time('quickSort3 -> O(nlogn)')
+quickSort3(arr.slice())
+console.timeEnd('quickSort3 -> O(nlogn)')
 
 console.time('shellSort -> O(nlogn)')
 shellSort(arr.slice())
@@ -82,3 +87,38 @@ bubbleSort(arr.slice())
 console.timeEnd('bubbleSort -> O(n**2)')
 
 // 排序速度成倍数
+// array.sort: 131.561ms
+// countingSort -> O(n + k): 30.686ms
+// radixSort -> O(n + k): 4662.068ms
+// bucketSort -> O(n + k): 4011.308ms
+// quickSort -> O(nlogn): 22.482ms
+// quickSort2 -> O(nlogn): 22.722ms
+// quickSort3 -> O(nlogn): 25.818ms
+// shellSort -> O(nlogn): 31.158ms
+// shellSort2 -> O(nlogn): 34.330ms
+// heapSort -> O(nlogn): 42.209ms
+// mergeSortRecurse -> O(nlogn): 187.263ms
+// mergeSortIteration -> O(nlogn): 540.492ms
+// insertionSort -> O(n**2): 3706.632ms
+// insertionSort2 -> O(n**2): 4121.403ms
+// selectionSort -> O(n**2): 8454.402ms
+// cocktailSort -> O(n**2): 25613.020ms
+// bubbleSort -> O(n**2): 23078.864ms
+
+// array.sort: 115.794ms
+// countingSort -> O(n + k): 15.221ms
+// radixSort -> O(n + k): 4499.153ms
+// bucketSort -> O(n + k): 4110.335ms
+// quickSort -> O(nlogn): 20.354ms
+// quickSort2 -> O(nlogn): 24.653ms
+// quickSort3 -> O(nlogn): 24.979ms
+// shellSort -> O(nlogn): 30.827ms
+// shellSort2 -> O(nlogn): 33.478ms
+// heapSort -> O(nlogn): 40.442ms
+// mergeSortRecurse -> O(nlogn): 174.787ms
+// mergeSortIteration -> O(nlogn): 540.217ms
+// insertionSort -> O(n**2): 3454.316ms
+// insertionSort2 -> O(n**2): 4387.812ms
+// selectionSort -> O(n**2): 12488.704ms
+// cocktailSort -> O(n**2): 27563.620ms
+// bubbleSort -> O(n**2): 22774.625ms
