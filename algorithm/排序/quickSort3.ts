@@ -49,4 +49,4 @@ export function quickSort3(arr: at, l?: number, r?: number) {
   return arr
 }
 
-console.log(quickSort3([2, 3, 4, 1, 9, 5, 7, 4, 55, 2, 12, 1000]))
+// console.log(quickSort3([2, 3, 4, 1, 9, 5, 7, 4, 55, 2, 12, 1000]))
