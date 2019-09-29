@@ -46,6 +46,45 @@
 - [鸡尾酒排序](https://zh.wikipedia.org/wiki/%E9%B8%A1%E5%B0%BE%E9%85%92%E6%8E%92%E5%BA%8F)
 - [鸡尾酒排序 ts 实现](https://github.com/lxfriday/give-me-job/blob/master/algorithm/排序/cocktailSort.ts)
 
+```ts
+export function bubbleSort(arr: number[]) {
+  const length = arr.length
+  if (length <= 1) return arr
+  for (let i = 0; i < length; i++) {
+    let changed: boolean = false // 没有数据交换则表示已经有序了
+    for (let j = 0; j < length - 1 - i; j++) {
+      if (arr[j] > arr[j + 1]) {
+        swap(arr, j, j + 1)
+        changed = true
+      }
+    }
+    if (!changed) break
+  }
+  return arr
+}
+```
+
+鸡尾酒排序
+
+```ts
+export function cocktailSort(arr: number[]) {
+  const len = arr.length
+  for (let i = 0; i < len / 2; i++) {
+    let start: number = 0
+    let end: number = len - 1
+    for (let j = start; j < end; j++) {
+      if (arr[j] > arr[j + 1]) swap(arr, j, j + 1)
+    }
+    end--
+    for (let j = end; j > start; j--) {
+      if (arr[j] < arr[j - 1]) swap(arr, j - 1, j)
+    }
+    start++
+  }
+  return arr
+}
+```
+
 冒泡排序
 
 ![冒泡排序](https://raw.githubusercontent.com/lxfriday/give-me-job/master/algorithm/排序/assets/bubbleSort.gif)
@@ -64,6 +103,23 @@
 
 - [选择排序](https://zh.wikipedia.org/wiki/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F)
 - [选择排序 ts 实现](https://github.com/lxfriday/give-me-job/blob/master/algorithm/排序/selectionSort.ts)
+
+```ts
+export function selectionSort(arr: number[]) {
+  const length = arr.length
+  if (length <= 1) return arr
+  for (let i = 0; i < length; i++) {
+    let min = i
+    for (let j = i + 1; j < length; j++) {
+      if (arr[j] < arr[min]) {
+        min = j
+      }
+    }
+    swap(arr, i, min)
+  }
+  return arr
+}
+```
 
 ![选择排序1](https://raw.githubusercontent.com/lxfriday/give-me-job/master/algorithm/排序/assets/selectionSort.gif)
 
@@ -85,6 +141,49 @@ Insertion Sort 和打扑克牌时，从牌桌上逐一拿起扑克牌，在手�
 1. 重复步骤 3，直到找到已排序的元素小于或者等于新元素的位置
 1. 将新元素插入到该位置后
 1. 重复步骤 2~5
+
+```ts
+export function insertionSort(arr: number[]) {
+  const length = arr.length
+  if (length <= 1) return arr
+  for (let i = 1; i < length; i++) {
+    const cur = arr[i]
+    let j = i - 1
+    for (; j >= 0; j--) {
+      if (arr[j] > cur) {
+        arr[j + 1] = arr[j]
+      } else {
+        break
+      }
+    }
+    arr[j + 1] = cur
+  }
+
+  return arr
+}
+```
+
+or
+
+```ts
+export function insertionSort2(arr: number[]) {
+  const len = arr.length
+  for (let i = 1; i < len; i++) {
+    for (let j = i - 1; j >= 0; j--) {
+      if (arr[j] > arr[j + 1]) {
+        // 这里是更改两个元素，所以比上面的方法效率低
+        swap(arr, j + 1, j)
+      } else {
+        break
+      }
+    }
+  }
+  return arr
+}
+```
+
+- [插入排序](https://zh.wikipedia.org/wiki/插入排序)
+- [插入排序 ts 实现](https://github.com/lxfriday/give-me-job/blob/master/algorithm/排序/insertionSort.ts)
 
 ![插入排序1](https://raw.githubusercontent.com/lxfriday/give-me-job/master/algorithm/排序/assets/insertionSort.gif)
 
@@ -111,6 +210,117 @@ Insertion Sort 和打扑克牌时，从牌桌上逐一拿起扑克牌，在手�
 - [快速排序](https://zh.wikipedia.org/wiki/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F)
 - [快速排序 ts 实现](https://github.com/lxfriday/give-me-job/blob/master/algorithm/排序/quickSort.ts)
 
+1 普通快排
+
+```ts
+function partition(arr: number[], left: number, right: number): number {
+  let pivot: number = left // 默认从最左边开始，有优化空间
+  let index = pivot + 1
+  for (let i = index; i <= right; i++) {
+    if (arr[i] < arr[pivot]) {
+      swap(arr, i, index)
+      index++
+    }
+  }
+  swap(arr, pivot, index - 1)
+  return index - 1
+}
+
+export function quickSort(arr: number[], l?: number, r?: number) {
+  const len = arr.length
+  const left: number = typeof l === 'number' ? l : 0
+  const right: number = typeof r === 'number' ? r : len - 1
+  let partitionIndex = 0
+  if (left < right) {
+    partitionIndex = partition(arr, left, right)
+    quickSort(arr, left, partitionIndex - 1)
+    quickSort(arr, partitionIndex + 1, right)
+  }
+  return arr
+}
+```
+
+2 左右指针快排
+
+```ts
+function partition(arr: number[], left: number, right: number): number {
+  let l: number = left // 默认从最左边开始，有优化空间
+  let r: number = right
+  const target: number = arr[left]
+
+  while (l < r) {
+    while (arr[r] >= target && r > l) {
+      r--
+    }
+    while (arr[l] <= target && l < r) {
+      l++
+    }
+    swap(arr, l, r)
+  }
+
+  if (l !== left) {
+    swap(arr, l, left)
+  }
+
+  return l
+}
+
+export function quickSort2(arr: at, l?: number, r?: number) {
+  const len = arr.length
+  const left: number = typeof l === 'number' ? l : 0
+  const right: number = typeof r === 'number' ? r : len - 1
+  let partitionIndex = 0
+  if (left < right) {
+    partitionIndex = partition(arr, left, right)
+    quickSort2(arr, left, partitionIndex - 1)
+    quickSort2(arr, partitionIndex + 1, right)
+  }
+  return arr
+}
+```
+
+3 三路快排
+
+```ts
+function partion(arr: at, l: number, r: number) {
+  // 基准数选取区间的第一个值
+  let v = arr[l]
+  let lt = l
+  let gt = r + 1
+
+  // 下面的循环不好理解
+  // i 和 gt 都在变化，gt 向左移动可以不影响 i，lt 增长会把等于v的项转移到 i，所以需要 i++
+  for (let i = l + 1; i < gt; ) {
+    if (arr[i] === v) {
+      // lt 和 i 在这里拉开差距
+      i++
+    } else if (arr[i] > v) {
+      swap(arr, gt - 1, i)
+      gt--
+    } else {
+      swap(arr, lt + 1, i)
+      lt++
+      i++
+    }
+  }
+
+  swap(arr, l, lt) // arr[lt] === v
+  lt--
+  return { lt, gt }
+}
+
+export function quickSort3(arr: at, l?: number, r?: number) {
+  const len = arr.length
+  const left: number = typeof l === 'number' ? l : 0
+  const right: number = typeof r === 'number' ? r : len - 1
+  if (left >= right) return
+  let { lt, gt } = partion(arr, left, right)
+  quickSort3(arr, l, lt)
+  quickSort3(arr, gt, r)
+  return arr
+}
+```
+
 ![快速排序](https://raw.githubusercontent.com/lxfriday/give-me-job/master/algorithm/排序/assets/quicksort.gif)
 
 ![快速排序](https://upload.wikimedia.org/wikipedia/commons/6/6a/Sorting_quicksort_anim.gif)
@@ -128,6 +338,47 @@ Insertion Sort 和打扑克牌时，从牌桌上逐一拿起扑克牌，在手�
 
 - [希尔排序](https://zh.wikipedia.org/wiki/%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F)
 - [希尔排序 ts 实现](https://github.com/lxfriday/give-me-job/blob/master/algorithm/排序/shellSort.ts)
+
+```ts
+export function shellSort(arr: number[]) {
+  const length: number = arr.length
+  let i, j
+  // 调整 gap
+  for (let gap = length >> 1; gap > 0; gap >>= 1) {
+    // 按区间插排
+    for (i = gap; i < length; i++) {
+      let temp: number = arr[i]
+      // 从当前位置往左按区间扫描
+      for (j = i - gap; j >= 0 && arr[j] > temp; j -= gap) {
+        arr[j + gap] = arr[j]
+      }
+      arr[j + gap] = temp
+    }
+  }
+  return arr
+}
+```
+
+or
+
+```ts
+export function shellSort2(arr: number[]) {
+  const length: number = arr.length
+  let i, j
+  // 调整 gap
+  for (let gap = length >> 1; gap > 0; gap >>= 1) {
+    // 按区间插排
+    for (i = gap; i < length; i++) {
+      // 从当前位置往左按区间扫描
+      for (j = i - gap; j >= 0 && arr[j] > arr[j + gap]; j -= gap) {
+        // 这里是更改两个元素，所以比上面的方法效率低
+        swap(arr, j, j + gap)
+      }
+    }
+  }
+  return arr
+}
+```
 
 ![希尔排序](https://upload.wikimedia.org/wikipedia/commons/d/d8/Sorting_shellsort_anim.gif)
 
@@ -154,6 +405,43 @@ Insertion Sort 和打扑克牌时，从牌桌上逐一拿起扑克牌，在手�
 1. 重复步骤 3 直到某一指针到达序列尾
 1. 将另一序列剩下的所有元素直接复制到合并序列尾
 
+```ts
+function merge(lArr: number[], rArr: number[]) {
+  const result: number[] = []
+  while (lArr.length && rArr.length) {
+    if (lArr[0] < rArr[0]) {
+      result.push(<number>lArr.shift())
+    } else {
+      result.push(<number>rArr.shift())
+    }
+  }
+  while (lArr.length) {
+    result.push(<number>lArr.shift())
+  }
+  while (rArr.length) {
+    result.push(<number>rArr.shift())
+  }
+  return result
+}
+
+function merge2(lArr: number[], rArr: number[]) {
+  const result: number[] = []
+  let lLen = lArr.length
+  let rLen = rArr.length
+  let i = 0
+  let j = 0
+  while (i < lLen && j < rLen) {
+    if (lArr[i] < rArr[j]) result.push(lArr[i++])
+    else result.push(rArr[j++])
+  }
+
+  while (i < lLen) result.push(lArr[i++])
+  while (j < rLen) result.push(rArr[j++])
+
+  return result
+}
+```
+
 **迭代法（Bottom-up）**
 
 <img src=https://raw.githubusercontent.com/lxfriday/give-me-job/master/algorithm/排序/assets/mergesort2.png width=300 />
@@ -163,6 +451,37 @@ Insertion Sort 和打扑克牌时，从牌桌上逐一拿起扑克牌，在手�
 1. 将序列每相邻两个数字进行归并操作，形成 ceil(n/2) 个序列，排序后每个序列包含两/一个元素
 1. 若此时序列数不是 1 个则将上述序列再次归并，形成 ceil(n/4) 个序列，每个序列包含四/三个元素
 1. 重复步骤 2，直到所有元素排序完毕，即序列数为 1
+
+```ts
+export function mergeSort2(arr: number[]): number[] {
+  const len = arr.length
+  for (let sz = 1; sz < len; sz *= 2) {
+    for (let i = 0; i < len - sz; i += 2 * sz) {
+      const start = i
+      const mid = i + sz - 1
+      const end = Math.min(i + 2 * sz - 1, len - 1)
+      merge(arr, start, mid, end)
+    }
+  }
+  return arr
+}
+
+function merge(arr: number[], start: number, mid: number, end: number) {
+  let i = start
+  let j = mid + 1
+  const tmp = []
+  let k = start
+  for (let w = start; w <= end; w++) {
+    tmp[w] = arr[w]
+  }
+  while (i < mid + 1 && j < end + 1) {
+    if (tmp[i] < tmp[j]) arr[k++] = tmp[i++]
+    else arr[k++] = tmp[j++]
+  }
+  while (i < mid + 1) arr[k++] = tmp[i++]
+  while (j < end + 1) arr[k++] = tmp[j++]
+}
+```
 
 - [归并排序](https://zh.wikipedia.org/wiki/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F)
 - [归并排序（自顶向下，递归法） ts 实现](https://github.com/lxfriday/give-me-job/blob/master/algorithm/排序/mergeSort.ts)
@@ -191,6 +510,82 @@ Insertion Sort 和打扑克牌时，从牌桌上逐一拿起扑克牌，在手�
 - [堆排序](https://zh.wikipedia.org/wiki/%E5%A0%86%E6%8E%92%E5%BA%8F)
 - [堆排序 ts 实现](https://github.com/lxfriday/give-me-job/blob/master/algorithm/排序/heapSort.ts)
 
+```ts
+function heapifyMax(arr: at, i: number, len: number) {
+  const left = 2 * i + 1
+  const right = 2 * i + 2
+  let max = i
+
+  if (left < len && arr[left] > arr[max]) {
+    max = left
+  }
+
+  if (right < len && arr[right] > arr[max]) {
+    max = right
+  }
+
+  if (max !== i) {
+    swap(arr, max, i)
+    heapifyMax(arr, max, len)
+  }
+}
+
+function heapifyMin(arr: at, i: number, len: number) {
+  const left = 2 * i + 1
+  const right = 2 * i + 2
+  let min = i
+
+  if (left < len && arr[left] < arr[min]) {
+    min = left
+  }
+
+  if (right < len && arr[right] < arr[min]) {
+    min = right
+  }
+
+  if (min !== i) {
+    swap(arr, min, i)
+    heapifyMin(arr, min, len)
+  }
+}
+
+// 构建大顶堆
+function buildMaxHeap(arr: at) {
+  const len = arr.length
+  for (let i = Math.floor(len / 2); i >= 0; i--) {
+    heapifyMax(arr, i, len)
+  }
+}
+
+// 构建小顶堆
+function buildMinHeap(arr: at) {
+  const len = arr.length
+  for (let i = Math.floor(len / 2); i >= 0; i--) {
+    heapifyMin(arr, i, len)
+  }
+}
+
+// asc 为 true 表示从小到大，false 为从大到小
+export function heapSort(arr: at, asc: boolean = true) {
+  if (asc) {
+    buildMaxHeap(arr)
+    const len = arr.length
+    for (let i = len - 1; i > 0; i--) {
+      swap(arr, 0, i)
+      heapifyMax(arr, 0, i)
+    }
+  } else {
+    buildMinHeap(arr)
+    const len = arr.length
+    for (let i = len - 1; i > 0; i--) {
+      swap(arr, 0, i)
+      heapifyMin(arr, 0, i)
+    }
+  }
+  return arr
+}
+```
+
 ![堆排序](https://upload.wikimedia.org/wikipedia/commons/1/1b/Sorting_heapsort_anim.gif)
 
 ## 计数排序
@@ -213,6 +608,32 @@ Insertion Sort 和打扑克牌时，从牌桌上逐一拿起扑克牌，在手�
 - [计数排序](https://zh.wikipedia.org/wiki/%E8%AE%A1%E6%95%B0%E6%8E%92%E5%BA%8F)
 - [计数排序 ts 实现](https://github.com/lxfriday/give-me-job/blob/master/algorithm/排序/countingSort.ts)
 
+```ts
+export function countingSort(arr: at) {
+  const bucket: at = []
+  const len = arr.length
+  // 数组下标的游标
+  let sortIndex: number = 0
+
+  for (let i = 0; i < len; i++) {
+    if (bucket[arr[i]]) {
+      bucket[arr[i]]++
+    } else {
+      // 数组的下标不能为负数，所以计数排序限制只能排序自然数
+      bucket[arr[i]] = 1
+    }
+  }
+
+  for (let j = 0; j < bucket.length; j++) {
+    while (bucket[j]) {
+      arr[sortIndex++] = j
+      bucket[j]--
+    }
+  }
+  return arr
+}
+```
+
 ![计数排序](https://raw.githubusercontent.com/lxfriday/give-me-job/master/algorithm/排序/assets/countingSort.gif)
 
 ## 基数排序
@@ -227,6 +648,34 @@ Insertion Sort 和打扑克牌时，从牌桌上逐一拿起扑克牌，在手�
 
 - [基数排序](https://zh.wikipedia.org/wiki/%E5%9F%BA%E6%95%B0%E6%8E%92%E5%BA%8F)
 - [基数排序 ts 实现](https://github.com/lxfriday/give-me-job/blob/master/algorithm/排序/radixSort.ts)
+
+```ts
+export function radixSort(arr: at): at {
+  const len = arr.length
+  const max = Math.max(...arr)
+  let buckets: at[] = []
+  let digit = `${max}`.length
+  let start = 1
+  let res: at = arr.slice()
+  while (digit > 0) {
+    start *= 10
+    for (let i = 0; i < len; i++) {
+      const j = res[i] % start
+      if (buckets[j] === void 0) {
+        buckets[j] = []
+      }
+      buckets[j].push(res[i])
+    }
+    res = []
+    for (let j = 0; j < buckets.length; j++) {
+      buckets[j] && (res = res.concat(buckets[j]))
+    }
+    buckets = []
+    digit--
+  }
+  return res
+}
+```
 
 ![基数排序](https://raw.githubusercontent.com/lxfriday/give-me-job/master/algorithm/排序/assets/radixSort.gif)
 
@@ -244,9 +693,52 @@ Insertion Sort 和打扑克牌时，从牌桌上逐一拿起扑克牌，在手�
 - [桶排序](https://zh.wikipedia.org/wiki/%E6%A1%B6%E6%8E%92%E5%BA%8F)
 - [桶排序 ts 实现](https://github.com/lxfriday/give-me-job/blob/master/algorithm/排序/bucketSort.ts)
 
+```ts
+export function bucketSort(arr: at, size: number = 5) {
+  const len = arr.length
+  const max = Math.max(...arr)
+  const min = Math.min(...arr)
+  const bucketSize = Math.floor((max - min) / size) + 1
+  const bucket: at[] = []
+  const res: at = []
+
+  for (let i = 0; i < len; i++) {
+    const j = Math.floor((arr[i] - min) / bucketSize)
+    !bucket[j] && (bucket[j] = [])
+    bucket[j].push(arr[i])
+    let l = bucket[j].length
+    while (l > 0) {
+      // 每个桶内部要进行排序
+      // 冒泡已经很快了，其实只有一个元素需要确定自己的位置
+      bucket[j][l] < bucket[j][l - 1] && swap(bucket[j], l, l - 1)
+      // 不要直接这么一个排序，bucket[j]内部都是有序的，只有最后一个是无序的
+      // bucket[j].sort((a, b) => a - b)
+      l--
+    }
+  }
+
+  // 每个桶内部数据已经是有序的
+  // 将桶内数组拼接起来即可
+  for (let i = 0; i < bucket.length; i++) {
+    const l = bucket[i] ? bucket[i].length : 0
+    for (let j = 0; j < l; j++) {
+      res.push(bucket[i][j])
+    }
+  }
+  return res
+}
+```
+
 ![桶排序](https://raw.githubusercontent.com/lxfriday/give-me-job/master/algorithm/排序/assets/bucketSort.gif)
 图片来自：五分钟学算法
 
 ## 参考
 
 - [hustcc/JS-Sorting-Algorithm](https://github.com/hustcc/JS-Sorting-Algorithm)
+
+
+---
+
+**欢迎大家关注我的掘金和公众号，算法、TypeScript、React 及其生态源码定期讲解。**
+
+![](https://user-gold-cdn.xitu.io/2019/9/4/16cfa7ba6a2b3785?w=600&h=600&f=png&s=319721)
