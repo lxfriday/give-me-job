@@ -10,20 +10,26 @@ const server = http.createServer(function(req, res) {
   form.keepExtensions = true
 
   form.parse(req, function(err, fields, files) {
-    res.writeHead(200, { 'content-type': 'text/plain' })
-    res.write('received upload:\n\n')
+    console.log('files', {
+      err,
+      fields,
+      files,
+    })
+
+    res.writeHead(200, { 'content-type': 'application/json' })
+    res.write(JSON.stringify({ success: true }))
     res.end()
   })
 })
 
 server.listen(3333)
 
-console.log('now listening 3333')
+// console.log('now listening 3333')
 
-const server2 = http.createServer(function(req, res) {
-  console.log(url.parse(req.url))
-  res.setHeader('Content-Type', 'application/json')
-  res.statusCode = 200
-  res.end(JSON.stringify({ hello: 'world' }))
-})
-server2.listen(3334)
+// const server2 = http.createServer(function(req, res) {
+//   console.log(url.parse(req.url))
+//   res.setHeader('Content-Type', 'application/json')
+//   res.statusCode = 200
+//   res.end(JSON.stringify({ hello: 'world' }))
+// })
+// server2.listen(3334)

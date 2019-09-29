@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
       console.log('onreadystatechange', xhr)
     }
     xhr.open('POST', targetUrl)
-    xhr.setRequestHeader('Content-Type', 'multipart/form-data')
+    // xhr.setRequestHeader('Content-Type', 'multipart/form-data')
     xhr.responseType = 'json'
 
     xhr.onloadstart = function(e) {
