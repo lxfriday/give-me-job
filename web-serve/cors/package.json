@@ -1,0 +1,16 @@
+{
+  "name": "cors",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "s": "serve .",
+    "app": "node app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cross-env": "^6.0.3"
+  }
+}
