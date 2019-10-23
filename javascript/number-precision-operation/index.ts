@@ -27,7 +27,8 @@ export function times(num1: number, num2: number): number {
   return (intNum1 * intNum2) / Math.pow(10, bn)
 }
 
-console.log(plus(0.1, 0.2), 0.1 + 0.2)
-console.log(minus(1, 0.9), 1 - 0.9)
-console.log(divide(0.1, 0.3), 0.1 / 0.3)
-console.log(times(0.1, 0.1), 0.1 * 0.1)
+console.log('plus', plus(0.1, 0.2), 0.1 + 0.2)
+console.log('plus', minus(1, 0.9), 1 - 0.9)
+console.log('divide', divide(0.1, 0.3), 0.1 / 0.3)
+console.log('divide', divide(33.3333, 100), 33.3333 / 100)
+console.log('times', times(0.1, 0.1), 0.1 * 0.1)
