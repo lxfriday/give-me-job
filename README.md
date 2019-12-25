@@ -7,6 +7,7 @@
 ## 系列目录
 
 - [JavaScript 知识树](https://github.com/lxfriday/give-me-job/issues/65)
+- [CSS 知识树](https://github.com/lxfriday/give-me-job/issues/89)
 - [浏览器知识树](https://github.com/lxfriday/give-me-job/issues/77)
 - [网络协议知识树](https://github.com/lxfriday/give-me-job/issues/78)
 - [浏览器知识树](https://github.com/lxfriday/give-me-job/issues/77)
