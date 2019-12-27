@@ -22,7 +22,7 @@ A.prototype.sayName = function() {
 
 // ---- test code-------
 
-function monitorNew() {
+function simulateNew() {
   const Constructor = Array.prototype.shift.call(arguments)
   const target = Object.create(Constructor.prototype)
 
@@ -31,4 +31,4 @@ function monitorNew() {
   return typeof ret === 'object' ? ret : target
 }
 
-console.log(monitorNew(A, 'yuny'))
+console.log(simulateNew(A, 'yuny'))
