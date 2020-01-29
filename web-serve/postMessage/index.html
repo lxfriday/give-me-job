@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    // a.html
+    <iframe src="http://localhost:5000/b.html" frameborder="0" id="frame" onload="load()"></iframe> //等它加载完触发一个事件
+    <script>
+      function load() {
+        let frame = document.getElementById('frame')
+        frame.contentWindow.postMessage('我爱你', 'http://localhost:5000') //发送数据
+        window.onmessage = function(e) {
+          //接受返回数据
+          console.log(e.data) //我不爱你
+        }
+      }
+    </script>
+  </body>
+</html>

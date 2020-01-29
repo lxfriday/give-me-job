@@ -3,17 +3,16 @@ const http = require('http')
 
 const app = http.createServer((req, res) => {
   const urlObj = url.parse(req.url)
-  console.log(urlObj)
+  console.log('urlObj', urlObj)
   const query = urlObj.query.split('&').map(v => ({ [v.split('=')[0]]: v.split('=')[1] }))
   console.log('query', query)
   res.end(`${query[1].callback}('a cat ')`)
 })
 
 app.listen(3333)
-
 console.log('listening')
 
-// Url {
+// urlObj Url {
 //   protocol: null,
 //   slashes: null,
 //   auth: null,
