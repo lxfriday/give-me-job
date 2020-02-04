@@ -26,6 +26,8 @@ function partition(arr: number[], left: number, right: number): number {
   const target: number = arr[left]
 
   while (l < r) {
+    // 这个顺序不能反，必须是 target <= arr[r] 在 target >= arr[l] 的前面比较
+    // l r 互换之后，r 表示的是大于 target 的值，如果l增加到和r相等，则会导致出现错误，所以r必须优先-1
     while (arr[r] >= target && r > l) {
       r--
     }
