@@ -1,2 +1,3 @@
 algorithm/**/*.js
 *.min.js
+testcode/
